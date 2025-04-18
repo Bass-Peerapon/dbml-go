@@ -6,23 +6,39 @@ package cmd
 import (
 	"os"
 
-	dbmlgengomodel "github.com/Bass-Peerapon/dbml-go/cmd/dbml-gen-go-model"
+	"github.com/Bass-Peerapon/dbml-go/internal/gen-go-model/gen"
 	"github.com/spf13/cobra"
+)
+
+var (
+	from             string
+	out              string
+	gopackage        string
+	fieldtags        []string
+	shouldGenTblName bool
+	rememberAlias    bool
+	recursive        bool
+	exclude          string
 )
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "dbml-go",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
+	Short: "Generate Go models from DBML files",
+	Long: `A CLI tool to generate Go model structs from DBML (Database Markup Language) files.
+Supports generating models from single files or directories of DBML files.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		gen.Generate(gen.Opts{
+			From:             from,
+			Out:              out,
+			Package:          gopackage,
+			FieldTags:        fieldtags,
+			ShouldGenTblName: shouldGenTblName,
+			RememberAlias:    rememberAlias,
+			Recursive:        recursive,
+			Exclude:          exclude,
+		})
+	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -43,6 +59,19 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	rootCmd.AddCommand(dbmlgengomodel.DBMLGenGoModelCmd)
+	rootCmd.Flags().
+		StringVarP(&from, "from", "f", "database.dbml", "source of dbml, can be https://dbdiagram.io/... | fire_name.dbml")
+	rootCmd.Flags().StringVarP(&out, "out", "o", "model", "output folder")
+	rootCmd.Flags().
+		StringVarP(&gopackage, "package", "p", "model", "package name for generated files")
+	rootCmd.Flags().
+		StringArrayVarP(&fieldtags, "fieldtags", "t", []string{"db", "json", "mapstructure"}, "go field tags to generate")
+	rootCmd.Flags().
+		BoolVar(&shouldGenTblName, "gen-table-name", false, "generate \"TableName\" function for models")
+	rootCmd.Flags().
+		BoolVar(&rememberAlias, "remember-alias", false, "remember table alias (only when 'from' is a directory)")
+	rootCmd.Flags().
+		BoolVar(&recursive, "recursive", false, "recursively search directories (only when 'from' is a directory)")
+	rootCmd.Flags().
+		StringVarP(&exclude, "exclude", "E", "", "regex pattern to exclude files (only when 'from' is a directory)")
 }

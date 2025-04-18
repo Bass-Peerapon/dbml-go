@@ -40,7 +40,7 @@ func main() {
 ## Go model generate
 
 Usage:
-  dbml-gen-go-model [flags]
+  dbml-go [flags]
 
 Flags:
   -E, --exclude string          regex for exclude "from" files. Only applied if "from" is a directory
@@ -73,7 +73,7 @@ Run:
 
 ```bash
 mkdir -p model
-dbml-gen-go-model -f database.dbml -o model -p model
+dbml-go -f database.dbml -o model -p model
 ```
 
 output: model/users.table.go
