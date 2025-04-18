@@ -1,4 +1,4 @@
-module github.com/duythinht/dbml-go
+module github.com/Bass-Peerapon/dbml-go
 
 go 1.23
 

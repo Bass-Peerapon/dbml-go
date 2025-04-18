@@ -6,7 +6,7 @@ package cmd
 import (
 	"os"
 
-	dbmlgengomodel "github.com/duythinht/dbml-go/cmd/dbml-gen-go-model"
+	dbmlgengomodel "github.com/Bass-Peerapon/dbml-go/cmd/dbml-gen-go-model"
 	"github.com/spf13/cobra"
 )
 

@@ -3,7 +3,7 @@ package dbmlgengomodel
 import (
 	"fmt"
 
-	"github.com/duythinht/dbml-go/internal/gen-go-model/gen"
+	"github.com/Bass-Peerapon/dbml-go/internal/gen-go-model/gen"
 	"github.com/spf13/cobra"
 )
 

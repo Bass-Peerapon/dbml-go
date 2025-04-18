@@ -11,9 +11,9 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/duythinht/dbml-go/core"
-	"github.com/duythinht/dbml-go/parser"
-	"github.com/duythinht/dbml-go/scanner"
+	"github.com/Bass-Peerapon/dbml-go/core"
+	"github.com/Bass-Peerapon/dbml-go/parser"
+	"github.com/Bass-Peerapon/dbml-go/scanner"
 )
 
 const (

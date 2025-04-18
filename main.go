@@ -4,7 +4,7 @@ Copyright © 2025 NAME HERE <EMAIL ADDRESS>
 */
 package main
 
-import "github.com/duythinht/dbml-go/cmd"
+import "github.com/Bass-Peerapon/dbml-go/cmd"
 
 func main() {
 	cmd.Execute()
